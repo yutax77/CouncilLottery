@@ -1,9 +1,7 @@
-import static org.junit.Assert.*;
-
+import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 import java.io.IOException;
 import java.util.Arrays;
-
-import org.junit.Test;
 
 public class LogReaderTest {
 	@Test
