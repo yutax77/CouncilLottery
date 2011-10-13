@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 public class LogElement {
 	private String chairman;
@@ -57,6 +58,19 @@ public class LogElement {
 				.append(", secretary=").append(secretary).append(", snack=")
 				.append(snack).append("]");
 		return builder.toString();
+	}
+
+	public void addChairmanCount(Map<Person, ExpCount> result, int no) {
+		Person person = new Person(chairman);
+		
+		//TODO 書き方に工夫の余地あり？
+		ExpCount expCount = result.get(person);
+		if(expCount == null) {
+			result.put(person, new ExpCount(1, no));
+		}
+		else {
+			result.put(person, expCount.update(no));
+		}
 	}
 
 }
