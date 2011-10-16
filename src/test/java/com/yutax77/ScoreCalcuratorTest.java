@@ -1,23 +1,40 @@
+package com.yutax77;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 public class ScoreCalcuratorTest {
+	private File dummyLog = new File(this.getClass().getResource("/DummyLog.json").getFile());
+	private Set<Person> persons;
+	
+	@BeforeClass
+	public void setUpClass() throws IOException {
+		WorkerListReader reader = new WorkerListReader(this.getClass().getResource("/DummyWorkerList.txt").getFile());
+		persons = reader.read();
+	}
+	
 	@Test
-	public void testCalcChairmanScore() {
-		Log log = new Log();
-		ScoreCalcurator calc = new ScoreCalcurator();
+	public void testCalcChairmanScore() throws IOException {
+		Log log = Log.createFromFile(dummyLog);
+		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
 		Scores scores = calc.calc(log);
 		
 		assertNotNull(scores);
 	}
 
 	@Test
-	public void testCalcNormalizedCount() {
-		Log log = new Log();
-		ScoreCalcurator calc = new ScoreCalcurator();
+	public void testCalcNormalizedCount() throws IOException {
+		Log log = Log.createFromFile(dummyLog);
+		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
 		
 		Map<Person, ExpCount> counts = new HashMap<Person, ExpCount>();
 		counts.put(new Person("川代"), new ExpCount(3, 0));
@@ -37,7 +54,7 @@ public class ScoreCalcuratorTest {
 	
 	@Test
 	public void testCalcScore() {
-		ScoreCalcurator calc = new ScoreCalcurator();
+		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
 		
 		Map<Person, Double> normalizedCount = new HashMap<Person, Double>();
 		normalizedCount.put(new Person("川代"), 1.0);
@@ -57,7 +74,7 @@ public class ScoreCalcuratorTest {
 	
 	@Test
 	public void testCalcElapsedTimeScore() {
-		ScoreCalcurator calc = new ScoreCalcurator();
+		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
 		
 		Map<Person, ExpCount> counts = new HashMap<Person, ExpCount>();
 		counts.put(new Person("川代"), new ExpCount(1, 3));
@@ -77,7 +94,7 @@ public class ScoreCalcuratorTest {
 	
 	@Test
 	public void testCreateScores() {
-		ScoreCalcurator calc = new ScoreCalcurator();
+		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
 		
 		Map<Person, Double> scores1 = new HashMap<Person, Double>();
 		scores1.put(new Person("川代"), 0.0);

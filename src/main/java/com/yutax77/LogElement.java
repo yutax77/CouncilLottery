@@ -1,3 +1,5 @@
+package com.yutax77;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,32 @@ public class LogElement {
 	public LogElement(String chairman, String secretary, List<String> snack) {
 		this.chairman = chairman;
 		this.secretary = secretary;
+		this.snack = snack;
+	}
+
+	public LogElement() {}
+	
+	public String getChairman() {
+		return chairman;
+	}
+
+	public void setChairman(String chairman) {
+		this.chairman = chairman;
+	}
+
+	public String getSecretary() {
+		return secretary;
+	}
+
+	public void setSecretary(String secretary) {
+		this.secretary = secretary;
+	}
+
+	public List<String> getSnack() {
+		return snack;
+	}
+
+	public void setSnack(List<String> snack) {
 		this.snack = snack;
 	}
 

@@ -1,3 +1,4 @@
+package com.yutax77;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +8,11 @@ import java.util.Set;
 public class ScoreCalcurator {
 	private Set<Person> persons;
 	private int newestNo;
+	
+	public ScoreCalcurator(Set<Person> persons, int newestNo) {
+		this.persons = persons;
+		this.newestNo = newestNo;
+	}
 	
 	public Scores calc(Log log) {
 		Map<Person, ExpCount> counts = log.calcExpCount(persons);

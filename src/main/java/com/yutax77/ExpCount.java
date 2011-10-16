@@ -1,3 +1,4 @@
+package com.yutax77;
 public class ExpCount implements Comparable<ExpCount>{
 	private int count;
 	private int lastExpNo;

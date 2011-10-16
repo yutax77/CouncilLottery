@@ -1,3 +1,4 @@
+package com.yutax77;
 public class Person {
 	private String name;
 	
