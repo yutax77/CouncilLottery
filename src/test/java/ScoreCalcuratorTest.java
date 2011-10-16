@@ -9,7 +9,7 @@ public class ScoreCalcuratorTest {
 	public void testCalcChairmanScore() {
 		Log log = new Log();
 		ScoreCalcurator calc = new ScoreCalcurator();
-		Scores scores = calc.calc();
+		Scores scores = calc.calc(log);
 		
 		assertNotNull(scores);
 	}
@@ -73,5 +73,25 @@ public class ScoreCalcuratorTest {
 		expected.put(new Person("野村"), 1.0);
 		
 		assertEquals(actual, expected);
+	}
+	
+	@Test
+	public void testCreateScores() {
+		ScoreCalcurator calc = new ScoreCalcurator();
+		
+		Map<Person, Double> scores1 = new HashMap<Person, Double>();
+		scores1.put(new Person("川代"), 0.0);
+		scores1.put(new Person("佐々木"), 2.0);
+		scores1.put(new Person("福澤"), 3.0);
+		scores1.put(new Person("野村"), 1.0);
+		
+		Map<Person, Double> scores2 = new HashMap<Person, Double>();
+		scores2.put(new Person("川代"), 0.0);
+		scores2.put(new Person("佐々木"), 2.0);
+		scores2.put(new Person("福澤"), 3.0);
+		scores2.put(new Person("野村"), 1.0);
+		
+		Scores actual = calc.createScores(scores1, scores2);
+		assertNull(actual);
 	}
 }

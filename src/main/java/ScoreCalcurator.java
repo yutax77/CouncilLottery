@@ -2,12 +2,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class ScoreCalcurator {
+	private Set<Person> persons;
+	private int newestNo;
 	
 	public Scores calc(Log log) {
-		Map<Person, ExpCount> counts = log.calcExpCount(workers)
-		return new Scores();
+		Map<Person, ExpCount> counts = log.calcExpCount(persons);
+		Map<Person, Double> normalized = calcNormalizedCount(counts);
+		Map<Person, Double> score = calcScore(normalized);
+		
+		Map<Person, Double> elapsed = calcElapsedTimeScore(counts, newestNo);
+		return Scores.createScores(score, elapsed);
 	}
 
 	Map<Person, Double> calcNormalizedCount(Map<Person, ExpCount> counts) {
@@ -40,6 +47,8 @@ public class ScoreCalcurator {
 		return result;
 	}
 
-
+	Scores createScores(Map<Person, Double> countScores, Map<Person, Double> elapsedScores) {
+		return null;
+	}
 
 }
