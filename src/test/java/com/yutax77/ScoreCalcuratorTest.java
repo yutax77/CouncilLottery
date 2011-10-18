@@ -26,14 +26,13 @@ public class ScoreCalcuratorTest {
 	public void testCalcChairmanScore() throws IOException {
 		Log log = Log.createFromFile(dummyLog);
 		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
-		Scores scores = calc.calc(log);
+		Map<TitleType, Scores> scores = calc.calc(log);
 		
 		assertNotNull(scores);
 	}
 
 	@Test
 	public void testCalcNormalizedCount() throws IOException {
-		Log log = Log.createFromFile(dummyLog);
 		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
 		
 		Map<Person, ExpCount> counts = new HashMap<Person, ExpCount>();

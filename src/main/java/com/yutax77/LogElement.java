@@ -90,8 +90,22 @@ public class LogElement {
 
 	public void addChairmanCount(Map<Person, ExpCount> result, int no) {
 		Person person = new Person(chairman);
-		
-		//TODO 書き方に工夫の余地あり？
+		addCount(result, person, no);
+	}
+
+	public void addSecretaryCount(Map<Person, ExpCount> result, int no) {
+		Person person = new Person(secretary);
+		addCount(result, person, no);
+	}
+	
+	public void addSnackCount(Map<Person, ExpCount> result, int no) {
+		for(String name: snack) {
+			Person person = new Person(name);
+			addCount(result, person, no);
+		}
+	}
+	
+	private void addCount(Map<Person, ExpCount> result, Person person, int no) {
 		ExpCount expCount = result.get(person);
 		if(expCount == null) {
 			result.put(person, new ExpCount(1, no));
@@ -100,5 +114,4 @@ public class LogElement {
 			result.put(person, expCount.update(no));
 		}
 	}
-
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,20 +51,25 @@ public class Log {
 		return elements.get(number - 1);
 	}
 	
-	public Map<Person, ExpCount> calcExpCount(Set<Person> workers) {
-		Map<Person, ExpCount> result = new HashMap<Person, ExpCount>();
-		for(Person person: workers) {
-			result.put(person, new ExpCount(0, 0));
-		}
+	public Map<TitleType, Map<Person, ExpCount>> calcExpCount(Set<Person> workers) {
+		Map<TitleType, Map<Person, ExpCount>> result = new EnumMap<TitleType, Map<Person, ExpCount>>(TitleType.class);
 		
+		for(TitleType type: TitleType.values()) {
+			Map<Person, ExpCount> value = new HashMap<Person, ExpCount>();
+			for(Person person: workers) {
+				value.put(person, new ExpCount(0, 0));
+			}
+			result.put(type, value);
+		}
+
 		int no = 1;
 		for(LogElement element: elements) {
-			element.addChairmanCount(result, no);
+			element.addChairmanCount(result.get(TitleType.CHAIRMAN), no);
+			element.addSecretaryCount(result.get(TitleType.SECRETARY), no);
+			element.addSnackCount(result.get(TitleType.SNACK), no);
 			no++;
 		}
 		
 		return result;
 	}
-	
-
 }

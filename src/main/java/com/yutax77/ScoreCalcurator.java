@@ -1,5 +1,6 @@
 package com.yutax77;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,13 +15,20 @@ public class ScoreCalcurator {
 		this.newestNo = newestNo;
 	}
 	
-	public Scores calc(Log log) {
-		Map<Person, ExpCount> counts = log.calcExpCount(persons);
-		Map<Person, Double> normalized = calcNormalizedCount(counts);
-		Map<Person, Double> score = calcScore(normalized);
+	public Map<TitleType, Scores> calc(Log log) {
+		Map<TitleType, Map<Person, ExpCount>> counts = log.calcExpCount(persons);
 		
-		Map<Person, Double> elapsed = calcElapsedTimeScore(counts, newestNo);
-		return Scores.createScores(score, elapsed);
+		Map<TitleType, Scores> results = new EnumMap<TitleType, Scores>(TitleType.class);
+		for(TitleType type: TitleType.values()) {
+			Map<Person, ExpCount> count = counts.get(type);
+			Map<Person, Double> normalized = calcNormalizedCount(count);
+			Map<Person, Double> score = calcScore(normalized);
+			
+			Map<Person, Double> elapsed = calcElapsedTimeScore(count, newestNo);
+			results.put(type, Scores.createScores(score, elapsed));
+		}
+		
+		return results;
 	}
 
 	Map<Person, Double> calcNormalizedCount(Map<Person, ExpCount> counts) {
