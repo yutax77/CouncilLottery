@@ -28,5 +28,10 @@
   		<version>6.2.1</version>
   		<scope>test</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-lang3</artifactId>
+  		<version>3.0.1</version>
+  	</dependency>
   </dependencies>
 </project>

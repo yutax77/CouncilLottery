@@ -1,5 +1,5 @@
 package com.yutax77;
-public class Person {
+public class Person implements Comparable<Person>{
 	private String name;
 	
 	public Person(String name) {
@@ -36,5 +36,10 @@ public class Person {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Person [name=").append(name).append("]");
 		return builder.toString();
+	}
+
+	public int compareTo(Person o) {
+		//名前の辞書順
+		return name.compareTo(o.name);
 	}
 }
