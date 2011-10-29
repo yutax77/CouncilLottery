@@ -36,6 +36,10 @@ public class Log {
 		return log;
 	}
 	
+	public int getSize() {
+		return elements.size();
+	}
+	
 	public List<LogElement> getElements() {
 		return elements;
 	}

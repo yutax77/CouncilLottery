@@ -8,11 +8,9 @@ import java.util.Set;
 
 public class ScoreCalcurator {
 	private Set<Person> persons;
-	private int newestNo;
 	
-	public ScoreCalcurator(Set<Person> persons, int newestNo) {
+	public ScoreCalcurator(Set<Person> persons) {
 		this.persons = persons;
-		this.newestNo = newestNo;
 	}
 	
 	public Map<TitleType, Scores> calc(Log log) {
@@ -24,7 +22,7 @@ public class ScoreCalcurator {
 			Map<Person, Double> normalized = calcNormalizedCount(count);
 			Map<Person, Double> score = calcScore(normalized);
 			
-			Map<Person, Double> elapsed = calcElapsedTimeScore(count, newestNo);
+			Map<Person, Double> elapsed = calcElapsedTimeScore(count, log.getSize());
 			results.put(type, Scores.createScores(score, elapsed));
 		}
 		
@@ -60,9 +58,4 @@ public class ScoreCalcurator {
 		
 		return result;
 	}
-
-	Scores createScores(Map<Person, Double> countScores, Map<Person, Double> elapsedScores) {
-		return null;
-	}
-
 }

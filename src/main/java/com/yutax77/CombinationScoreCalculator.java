@@ -18,7 +18,7 @@ public class CombinationScoreCalculator {
 	private static final int COMBINATION_NUM = 3;
 	private static final Person[] DUMMY = new Person[]{};
 	
-	public NavigableSet<Combination> calc(Map<TitleType, Scores> scoreResult) {
+	public static NavigableSet<Combination> calc(Map<TitleType, Scores> scoreResult) {
 		NavigableSet<Combination> results = new TreeSet<Combination>();
 		
 		TreeMap<Double, Set<Person>> chairmanScores = scoreResult.get(TitleType.CHAIRMAN).getResult();
@@ -52,7 +52,7 @@ public class CombinationScoreCalculator {
 		return results;
 	}
 	
-	NavigableMap<Double, Set<Person>> getCanditateSecretary(NavigableMap<Double, Set<Person>> secretaryScores, Person chairman) {
+	static NavigableMap<Double, Set<Person>> getCanditateSecretary(NavigableMap<Double, Set<Person>> secretaryScores, Person chairman) {
 		NavigableMap<Double, Set<Person>> results = new TreeMap<Double, Set<Person>>();
 		
 		NavigableSet<Double> secretaryScoreRanks = secretaryScores.descendingKeySet();
@@ -82,7 +82,7 @@ public class CombinationScoreCalculator {
 		return results;
 	}
 	
-	NavigableMap<Double, Set<Pair<Person, Person>>> getCandidateSnack(NavigableMap<Double, Set<Person>> snackScores,
+	static NavigableMap<Double, Set<Pair<Person, Person>>> getCandidateSnack(NavigableMap<Double, Set<Person>> snackScores,
 																				Person chairman,
 																				Person secretary,
 																				Pair<Double, Person> keep) {

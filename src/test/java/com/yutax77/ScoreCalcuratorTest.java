@@ -1,7 +1,6 @@
 package com.yutax77;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class ScoreCalcuratorTest {
 	@Test
 	public void testCalcChairmanScore() throws IOException {
 		Log log = Log.createFromFile(dummyLog);
-		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
+		ScoreCalcurator calc = new ScoreCalcurator(persons);
 		Map<TitleType, Scores> scores = calc.calc(log);
 		
 		assertNotNull(scores);
@@ -33,7 +32,7 @@ public class ScoreCalcuratorTest {
 
 	@Test
 	public void testCalcNormalizedCount() throws IOException {
-		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
+		ScoreCalcurator calc = new ScoreCalcurator(persons);
 		
 		Map<Person, ExpCount> counts = new HashMap<Person, ExpCount>();
 		counts.put(new Person("川代"), new ExpCount(3, 0));
@@ -53,7 +52,7 @@ public class ScoreCalcuratorTest {
 	
 	@Test
 	public void testCalcScore() {
-		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
+		ScoreCalcurator calc = new ScoreCalcurator(persons);
 		
 		Map<Person, Double> normalizedCount = new HashMap<Person, Double>();
 		normalizedCount.put(new Person("川代"), 1.0);
@@ -73,7 +72,7 @@ public class ScoreCalcuratorTest {
 	
 	@Test
 	public void testCalcElapsedTimeScore() {
-		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
+		ScoreCalcurator calc = new ScoreCalcurator(persons);
 		
 		Map<Person, ExpCount> counts = new HashMap<Person, ExpCount>();
 		counts.put(new Person("川代"), new ExpCount(1, 3));
@@ -89,25 +88,5 @@ public class ScoreCalcuratorTest {
 		expected.put(new Person("野村"), 1.0);
 		
 		assertEquals(actual, expected);
-	}
-	
-	@Test
-	public void testCreateScores() {
-		ScoreCalcurator calc = new ScoreCalcurator(persons, 1);
-		
-		Map<Person, Double> scores1 = new HashMap<Person, Double>();
-		scores1.put(new Person("川代"), 0.0);
-		scores1.put(new Person("佐々木"), 2.0);
-		scores1.put(new Person("福澤"), 3.0);
-		scores1.put(new Person("野村"), 1.0);
-		
-		Map<Person, Double> scores2 = new HashMap<Person, Double>();
-		scores2.put(new Person("川代"), 0.0);
-		scores2.put(new Person("佐々木"), 2.0);
-		scores2.put(new Person("福澤"), 3.0);
-		scores2.put(new Person("野村"), 1.0);
-		
-		Scores actual = calc.createScores(scores1, scores2);
-		assertNull(actual);
 	}
 }
