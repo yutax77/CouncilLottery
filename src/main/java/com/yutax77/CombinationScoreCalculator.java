@@ -10,8 +10,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.yutax77.Combination.CombinationBuilder;
 
 public class CombinationScoreCalculator {
@@ -119,10 +117,10 @@ public class CombinationScoreCalculator {
 				}				
 			}
 			else {
-				double totalScore = keep.getKey() + snackEntry.getKey();
+				double totalScore = keep.getLeft() + snackEntry.getKey();
 				Set<Pair<Person, Person>> pairs = new HashSet<Pair<Person, Person>>();
 					for(Person person : persons) {
-						pairs.add(Pair.of(keep.getValue(), person));
+						pairs.add(Pair.of(keep.getRight(), person));
 				}
 				results.put(totalScore, pairs);
 			}

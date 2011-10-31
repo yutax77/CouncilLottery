@@ -1,6 +1,7 @@
 package com.yutax77;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -11,7 +12,6 @@ import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.testng.annotations.Test;
 
 public class CombinationScoreCalculatorTest {

@@ -4,7 +4,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

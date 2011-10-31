@@ -1,6 +1,5 @@
 package com.yutax77;
 
-import org.apache.commons.lang3.tuple.Pair;
 
 public class Combination implements Comparable<Combination>{
 	private double score;
