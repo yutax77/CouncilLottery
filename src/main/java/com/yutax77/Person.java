@@ -33,9 +33,7 @@ public class Person implements Comparable<Person>{
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Person [name=").append(name).append("]");
-		return builder.toString();
+		return name;
 	}
 
 	public int compareTo(Person o) {

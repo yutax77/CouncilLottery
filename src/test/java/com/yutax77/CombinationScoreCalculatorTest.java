@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 public class CombinationScoreCalculatorTest {
   @Test
   public void testCalc() {
-	  CombinationScoreCalculator calc = new CombinationScoreCalculator();
 	  Map<TitleType, Scores> input = new EnumMap<TitleType, Scores>(TitleType.class);
 	  Person a = new Person("a");
 	  Person b = new Person("b");
@@ -46,7 +45,7 @@ public class CombinationScoreCalculatorTest {
 	  input.put(TitleType.SECRETARY, Scores.createScores(secretaryScore, secretaryScore));
 	  input.put(TitleType.SNACK, Scores.createScores(snackScore, snackScore));
 	  
-	  NavigableSet<Combination> result = calc.calc(input);
+	  NavigableSet<Combination> result = CombinationScoreCalculator.calc(input);
 	  
 	  assertNotNull(result);
   }

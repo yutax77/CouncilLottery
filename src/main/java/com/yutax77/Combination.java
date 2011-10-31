@@ -20,6 +20,22 @@ public class Combination implements Comparable<Combination>{
 		this.chairman = chairman;
 	}
 	
+	public Person getChairman() {
+		return chairman;
+	}
+
+	public Person getSecretary() {
+		return secretary;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public Pair<Person, Person> getSnacPair() {
+		return snacPair;
+	}
+
 	public int compareTo(Combination o) {
 		int result = -(int)(this.score - o.score);
 		if(result != 0) 

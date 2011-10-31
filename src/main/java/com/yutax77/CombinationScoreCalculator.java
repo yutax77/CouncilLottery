@@ -15,20 +15,23 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.yutax77.Combination.CombinationBuilder;
 
 public class CombinationScoreCalculator {
-	private static final int COMBINATION_NUM = 3;
+	private static final int COMBINATION_NUM = 2;
 	private static final Person[] DUMMY = new Person[]{};
 	
 	public static NavigableSet<Combination> calc(Map<TitleType, Scores> scoreResult) {
 		NavigableSet<Combination> results = new TreeSet<Combination>();
 		
-		TreeMap<Double, Set<Person>> chairmanScores = scoreResult.get(TitleType.CHAIRMAN).getResult();
-		Double key = chairmanScores.lastKey();
-		TreeMap<Double, Set<Person>> secretaryScores = scoreResult.get(TitleType.SECRETARY).getResult();
-		TreeMap<Double, Set<Person>> snackScores = scoreResult.get(TitleType.SNACK).getResult();
-		for(int i = 0; i < COMBINATION_NUM; i++) {
-			Set<Person> persons = chairmanScores.get(key);
+		NavigableMap<Double, Set<Person>> chairmanScores = scoreResult.get(TitleType.CHAIRMAN).getResult();
+		NavigableMap<Double, Set<Person>> secretaryScores = scoreResult.get(TitleType.SECRETARY).getResult();
+		NavigableMap<Double, Set<Person>> snackScores = scoreResult.get(TitleType.SNACK).getResult();
+		
+		int chairmanCount = 0;
+		for(Entry<Double, Set<Person>> chairmanScore : chairmanScores.entrySet()){
+			if(COMBINATION_NUM < chairmanCount) {
+				break;
+			}
 			
-			for(Person person: persons) {
+			for(Person person: chairmanScore.getValue()) {
 				NavigableSet<Double> secretaryScoreRanks = secretaryScores.descendingKeySet();
 				for(Double secretaryScore : secretaryScoreRanks) {
 					NavigableMap<Double, Set<Person>> candidateSec = getCanditateSecretary(secretaryScores, person);
@@ -38,7 +41,7 @@ public class CombinationScoreCalculator {
 							for(Entry<Double, Set<Pair<Person, Person>>> snackEntry : candidateSnack.entrySet()) {
 								for(Pair<Person, Person> snackPair : snackEntry.getValue()) {
 									CombinationBuilder builder = new CombinationBuilder();
-									builder.chairman(key, person).secretary(secretaryScore, secretary);
+									builder.chairman(chairmanScore.getKey(), person).secretary(secretaryScore, secretary);
 									builder.snack(snackEntry.getKey(), snackPair);
 									results.add(builder.build());
 								}
@@ -47,6 +50,7 @@ public class CombinationScoreCalculator {
 					}
 				}
 			}
+			chairmanCount++;
 		}
 		
 		return results;
