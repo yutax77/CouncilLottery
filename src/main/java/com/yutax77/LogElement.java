@@ -108,7 +108,7 @@ public class LogElement {
 	private void addCount(Map<Person, ExpCount> result, Person person, int no) {
 		ExpCount expCount = result.get(person);
 		if(expCount == null) {
-			result.put(person, new ExpCount(1, no));
+			//personがWorkerListに含まれていない場合なので、無視する
 		}
 		else {
 			result.put(person, expCount.update(no));
