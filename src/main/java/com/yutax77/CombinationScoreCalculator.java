@@ -30,7 +30,7 @@ public class CombinationScoreCalculator {
 			}
 			
 			for(Person person: chairmanScore.getValue()) {
-				NavigableSet<Double> secretaryScoreRanks = secretaryScores.descendingKeySet();
+				NavigableSet<Double> secretaryScoreRanks = secretaryScores.navigableKeySet();
 				for(Double secretaryScore : secretaryScoreRanks) {
 					NavigableMap<Double, Set<Person>> candidateSec = getCanditateSecretary(secretaryScores, person);
 					for(Entry<Double, Set<Person>> entry : candidateSec.entrySet()) {
@@ -57,7 +57,7 @@ public class CombinationScoreCalculator {
 	static NavigableMap<Double, Set<Person>> getCanditateSecretary(NavigableMap<Double, Set<Person>> secretaryScores, Person chairman) {
 		NavigableMap<Double, Set<Person>> results = new TreeMap<Double, Set<Person>>();
 		
-		NavigableSet<Double> secretaryScoreRanks = secretaryScores.descendingKeySet();
+		NavigableSet<Double> secretaryScoreRanks = secretaryScores.navigableKeySet();
 		int i = 0;
 		for(Double secretaryScore : secretaryScoreRanks) {
 			Set<Person> secretaries = secretaryScores.get(secretaryScore);
