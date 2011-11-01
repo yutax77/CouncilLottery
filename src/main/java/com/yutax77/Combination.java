@@ -36,7 +36,7 @@ public class Combination implements Comparable<Combination>{
 	}
 
 	public int compareTo(Combination o) {
-		int result = -(int)(this.score - o.score);
+		int result = -(Double.compare(this.score, o.score));
 		if(result != 0) 
 			return result;
 		

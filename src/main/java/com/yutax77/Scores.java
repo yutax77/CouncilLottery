@@ -3,13 +3,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Arrays;
+import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class Scores {
-	private TreeMap<Double, Set<Person>> results;
+	private NavigableMap<Double, Set<Person>> results;
 	
-	private Scores(TreeMap<Double, Set<Person>> results) {
+	private Scores(NavigableMap<Double, Set<Person>> results) {
 		this.results = results;
 	}
 	
@@ -36,10 +37,10 @@ public class Scores {
 			}
 		}
 		
-		return new Scores(result);
+		return new Scores(result.descendingMap());
 	}
 	
-	public TreeMap<Double, Set<Person>> getResult() {
+	public NavigableMap<Double, Set<Person>> getResult() {
 		return results;
 	}
 }

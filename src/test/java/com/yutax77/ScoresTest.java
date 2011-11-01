@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -19,9 +20,9 @@ public class ScoresTest {
 		calced.put(new Person("d"), 0.0);
 		
 		Scores scores = Scores.createScores(calced, calced);
-		TreeMap<Double, Set<Person>> result = scores.getResult();
+		NavigableMap<Double, Set<Person>> result = scores.getResult();
 		
-		TreeMap<Double, Set<Person>> expected = new TreeMap<Double, Set<Person>>();
+		NavigableMap<Double, Set<Person>> expected = new TreeMap<Double, Set<Person>>();
 		expected.put(4.0, new HashSet<Person>(Arrays.asList(new Person("a"), new Person("b"))));
 		expected.put(2.0, new HashSet<Person>(Arrays.asList(new Person("c"))));
 		expected.put(0.0, new HashSet<Person>(Arrays.asList(new Person("d"))));
