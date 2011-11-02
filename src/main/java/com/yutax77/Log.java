@@ -1,8 +1,9 @@
 package com.yutax77;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class Log {
 		
 		Log log = null;
 		try {
-			reader = new BufferedReader(new FileReader(file));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 			@SuppressWarnings({ "unchecked", "serial" })
 			List<LogElement> elements = (List<LogElement>) JSON.decode(reader, (new ArrayList<LogElement>() {}).getClass().getGenericSuperclass());
 			log = new Log();
