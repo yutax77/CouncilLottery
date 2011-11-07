@@ -1,8 +1,8 @@
 [
 	{
-		"chairman" : "川代",
-		"secretary" : "佐々木",
-		"snack" : ["野村", "福澤"]
+		"chairman" : "hoge",
+		"secretary" : "foo",
+		"snack" : ["bar1", "bar2"]
 	}
 	
 ]
