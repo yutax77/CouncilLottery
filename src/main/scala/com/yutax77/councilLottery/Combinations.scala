@@ -6,9 +6,9 @@ case class Combinations(chairman: (Person, Double), secretary: (Person, Double),
 
 object Combinations {
 	def calc(chairmans: List[(Person, Double)], secretaries: List[(Person, Double)], snacks: List[(Person, Double)]): List[Combinations] = {
-		val descChairmans = chairmans.sortBy(_._2).groupBy(_._2)
-		val descSecretaries = secretaries.sortBy(_._2).groupBy(_._2)
-		val descSnacks = snacks.sortBy(_._2).groupBy(_._2).toList
+		val descChairmans = chairmans.sortBy(_._2).reverse.groupBy(_._2)
+		val descSecretaries = secretaries.sortBy(_._2).reverse.groupBy(_._2)
+		val descSnacks = snacks.sortBy(_._2).reverse.groupBy(_._2).toList
 		
 		def snackCombinations(chairman: Person, secretary: Person): List[(Set[Person], Double)] = {
 			val pf:PartialFunction[(Person, Double), (Person, Double)] = {

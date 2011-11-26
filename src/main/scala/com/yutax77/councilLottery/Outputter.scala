@@ -1,5 +1,7 @@
 package com.yutax77.councilLottery
 
+import scala.util.control.Breaks._
+
 object Outputter {
 	private val defaultMaxRank = 20
 	
@@ -8,11 +10,11 @@ object Outputter {
 			val buf = new StringBuilder()
 			buf.append(rank) + '\t'
 			buf.append("%.2f".format(combinations.score)) + '\t'
-			buf.append(combinations.chairman) + '\t'
-			buf.append(combinations.secretary) + '\t'
+			buf.append(combinations.chairman._1.name) + '\t'
+			buf.append(combinations.secretary._1.name) + '\t'
 			
 			for(snack <- combinations.snacks._1){
-				buf.append(snack).append("  ")
+				buf.append(snack.name).append("  ")
 			}
 			
 			println(buf)
@@ -21,18 +23,25 @@ object Outputter {
 		println("Rank \tScore \t議長 \t書記 \tおやつ係");
 		println("---------------------------------------------------");
 		
-		val sorted = results.sortBy(_.score)
+		val sorted = results.sortBy(_.score).reverse
 		
-		var count = 0
+		var count = 1
 		var rank = 1
 		var score = Double.MaxValue
-		sorted.takeWhile{comb => 
+		breakable{
+			sorted.foreach{comb =>
 				if(comb.score < score){
-					rank += count - rank
+					rank += (count - rank)
 				}
+				
+				if(maxRank < rank){
+					break
+				}
+				
 				count += 1
 				score = comb.score
-				rank < maxRank
-			}.foreach(	print(_, rank))
+				print(comb, rank)
+			}			
+		}
 	}
 }
