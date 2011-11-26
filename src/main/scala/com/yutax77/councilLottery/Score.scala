@@ -4,27 +4,20 @@ case class Score(person: Person, score: Double) {
 
 }
 
-object Score {
-	
-}
-
 object Scores {
-	def calcScore(counts: Map[Person, ExeCount]): Map[Person, Double] = {
+	def calcScores(counts: Map[Person, ExeCount], newestNo: Int): Map[Person, Double] = {
 		val max = counts.values.toList.maxBy(_.count).count
+		def calcScore(count: Int): Double = (1 / (1 + (count / max).toDouble))
+		def calcElapsedTimeScore(count: Int): Double = (1.0 - (count / newestNo).toDouble)
 		
-		def calcScoreImpl(l: List[(Person, ExeCount)], m: Map[Person, Double]): Map[Person, Double] = {
+		def calcScoreBase(l: List[(Person, ExeCount)], m: Map[Person, Double]): Map[Person, Double] = {
 			if(l.isEmpty) {
 				m
 			}
 			else {
-				calcScoreImpl(l.tail, m + (l.head._1 -> calc(l.head._2.count)))
+				calcScoreBase(l.tail, m + (l.head._1 -> (calcScore(l.head._2.count) + calcElapsedTimeScore(l.head._2.lastExpNo))))
 			}
-		}
-		
-		def calc(count: Int): Double = {
-			(1 / (1 + (count / max).toDouble))
-		}
-		
-		calcScoreImpl(counts.toList, Map.empty[Person, Double])
+		}	
+		calcScoreBase(counts.toList, Map.empty[Person, Double])
 	}
 }

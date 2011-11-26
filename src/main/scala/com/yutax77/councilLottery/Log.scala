@@ -1,6 +1,7 @@
 package com.yutax77.councilLottery
 import scala.collection.mutable.ListBuffer
-import scala.collection._
+import scala.io.Source
+import com.codahale.jerkson.Json._
 
 case class Log(chairmans: List[Person], secretaries: List[Person], snackes: List[Set[Person]]) {
 	require(chairmans.size == secretaries.size)
@@ -48,6 +49,15 @@ object Log {
 		new Log(chairmans.toList, secretaries.toList, snackes.toList)
 	}
 	
+	def read(file: String): Log = {
+		val source = Source.fromFile(file)
+		try {
+			val fromJson = parse[List[LogElement]](source)
+			Log.create(fromJson)
+		} finally {
+			source.close
+		}
+	}
 }
 case class LogElement(chairman: String,
 						secretary: String,

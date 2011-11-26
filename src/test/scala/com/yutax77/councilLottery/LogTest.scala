@@ -1,4 +1,4 @@
-package samples.councilLottery
+package com.yutax77.councilLottery
 import org.junit.runner.RunWith
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.FunSuite

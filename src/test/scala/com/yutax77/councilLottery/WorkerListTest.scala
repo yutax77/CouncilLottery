@@ -1,4 +1,4 @@
-package samples.councilLottery
+package com.yutax77.councilLottery
 
 import scala.collection.mutable
 import org.scalatest.junit.JUnitSuite
