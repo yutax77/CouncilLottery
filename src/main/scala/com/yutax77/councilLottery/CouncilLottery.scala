@@ -3,7 +3,7 @@ package com.yutax77.councilLottery
 object CouncilLottery {
 	def main(args: Array[String]): Unit = {
 		if(args.length < 2){
-			exit(1)
+			sys.exit(1)
 		}
 		
 		val workers = WorkerListReader.read(args(0))

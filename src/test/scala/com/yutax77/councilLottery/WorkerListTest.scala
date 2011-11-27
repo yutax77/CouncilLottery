@@ -4,12 +4,10 @@ import scala.collection.mutable
 import org.scalatest.junit.JUnitSuite
 import org.scalatest.matchers.ShouldMatchers
 import org.junit.Test
-import com.yutax77.councilLottery.WorkerListReader
 import org.scalatest.Spec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.FunSuite
-import com.yutax77.councilLottery.Person
 
 @RunWith(classOf[JUnitRunner])
 class WorkerListFunTest extends FunSuite with ShouldMatchers{
