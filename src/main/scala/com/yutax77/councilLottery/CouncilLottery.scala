@@ -8,11 +8,11 @@ object CouncilLottery {
 		
 		val workers = WorkerListReader.read(args(0))
 		val log = Log.createFromFile(args(1), workers)
+		val counts = ExeCounts.create(log, workers)
 		
-		val newestNo = log.chairmanCount.size
-		val chairmanScore = Scores.calcScores(log.chairmanCount, newestNo)
-		val secretaryScore = Scores.calcScores(log.secretaryCount, newestNo)
-		val snackScore = Scores.calcScores(log.snackCount, newestNo)
+		val chairmanScore = Scores.calcScores(counts.chairmans, log.newestNo)
+		val secretaryScore = Scores.calcScores(counts.secretaries, log.newestNo)
+		val snackScore = Scores.calcScores(counts.snackes, log.newestNo)
 		
 		val combinations = Combinations.calc(chairmanScore.toList, secretaryScore.toList, snackScore.toList)
 		
