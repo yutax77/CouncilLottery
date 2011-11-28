@@ -10,7 +10,7 @@ case class Log(chairmans: List[Person], secretaries: List[Person], snackes: List
 }
 
 object Log {
-	def create(elements: List[LogElement], workers: Set[Person]): Log = {
+	def create(elements: List[LogElement]): Log = {
 		val chairmans = new ListBuffer[Person]
 		val secretaries = new ListBuffer[Person]
 		val snackes = new ListBuffer[Set[Person]]
@@ -25,11 +25,11 @@ object Log {
 		new Log(chairmans.toList, secretaries.toList, snackes.toList)
 	}
 	
-	def createFromFile(file: String, workers: Set[Person]): Log = {
+	def createFromFile(file: String): Log = {
 		val source = Source.fromFile(file)
 		try {
 			val fromJson = parse[List[LogElement]](source)
-			Log.create(fromJson, workers)
+			Log.create(fromJson)
 		} finally {
 			source.close
 		}

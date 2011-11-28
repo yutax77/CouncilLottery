@@ -31,7 +31,7 @@ class LogTest extends FunSuite with ShouldMatchers{
 			}
 	
 		]""")
-		val actual = Log.create(list, Set.empty[Person])
+		val actual = Log.create(list)
 		val expected = new Log(List(Person("hoge")), List(Person("foo")), List(Set(Person("bar1"), Person("bar2"))))
 		actual should be (expected)
 	}	
@@ -39,7 +39,7 @@ class LogTest extends FunSuite with ShouldMatchers{
 	test("create Log from file") {
 		val source = Source.fromFile(this.getClass().getResource("/DummyLog.json").getFile())
 		val list = parse[List[LogElement]](source)
-		val actual = Log.create(list, Set.empty[Person])
+		val actual = Log.create(list)
 		val expected = new Log(List(Person("hoge")), List(Person("foo")), List(Set(Person("bar1"), Person("bar2"))))
 		actual should be (expected)
 		source.close

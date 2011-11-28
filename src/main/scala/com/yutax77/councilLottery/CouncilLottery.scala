@@ -7,7 +7,7 @@ object CouncilLottery {
 		}
 		
 		val workers = WorkerListReader.read(args(0))
-		val log = Log.createFromFile(args(1), workers)
+		val log = Log.createFromFile(args(1))
 		val counts = ExeCounts.create(log, workers)
 		
 		val chairmanScore = Scores.calcScores(counts.chairmans, log.newestNo)
