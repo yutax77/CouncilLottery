@@ -16,8 +16,8 @@ object ExeCounts {
 			r -- retiree
 		}
 	
-		val chairmanCount = updateCount(personCount(log.chairmans, Map.empty[Person, ExeCount], 1))
-		val secretaryCount = updateCount(personCount(log.secretaries, Map.empty[Person, ExeCount], 1))
+		val chairmanCount = updateCount(personCount(log.chairmans, Map.empty[Person, ExeCount], 1, _ + 1))
+		val secretaryCount = updateCount(personCount(log.secretaries, Map.empty[Person, ExeCount], 1, _ + 1))
 		val snackCount = updateCount(personSetCount(log.snackes, Map.empty[Person, ExeCount], 1))
 		
 		ExeCounts(chairmanCount, secretaryCount, snackCount)
@@ -32,13 +32,13 @@ object ExeCounts {
 		}
 	}
 	
-	private def personCount(l: List[Person], m: Map[Person, ExeCount], no: Int): Map[Person, ExeCount] = {
+	private def personCount(l: List[Person], m: Map[Person, ExeCount], no: Int, f: Int => Int): Map[Person, ExeCount] = {
 		if(l.isEmpty) {
 			m
 		}
 		else {
 			val count = m.getOrElse(l.head, ExeCount(0, 0)).update(no)
-			personCount(l.tail, m + (l.head -> count), no + 1)
+			personCount(l.tail, m + (l.head -> count), f(no), f)
 		}
 	}
 	
@@ -47,7 +47,7 @@ object ExeCounts {
 			m
 		}
 		else {
-			val counts = personCount(l.head.toList, m, no)
+			val counts = personCount(l.head.toList, m, no, x => x)
 			personSetCount(l.tail, counts, no + 1)
 		}
 	}	
