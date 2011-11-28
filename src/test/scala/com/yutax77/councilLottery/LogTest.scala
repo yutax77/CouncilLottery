@@ -37,11 +37,30 @@ class LogTest extends FunSuite with ShouldMatchers{
 	}	
 	
 	test("create Log from file") {
-		val source = Source.fromFile(this.getClass().getResource("/DummyLog.json").getFile())
-		val list = parse[List[LogElement]](source)
-		val actual = Log.create(list)
+		val actual = Log.createFromFile(this.getClass().getResource("/DummyLog.json").getFile())
 		val expected = new Log(List(Person("hoge")), List(Person("foo")), List(Set(Person("bar1"), Person("bar2"))))
 		actual should be (expected)
-		source.close
-	}	
+	}
+	 
+	test("All elemnts should be same size") {
+		intercept[IllegalArgumentException] {
+			//chairmans.size == 2
+			Log(List(Person("hoge"), Person("hoge2")), List(Person("foo")), List(Set(Person("bar1"), Person("bar2"))))
+		}
+		
+		intercept[IllegalArgumentException] {
+			//secretaries.size == 2
+			Log(List(Person("hoge")), List(Person("foo"), Person("foo2")), List(Set(Person("bar1"), Person("bar2"))))
+		}
+
+		intercept[IllegalArgumentException] {
+			//snackes.size == 2
+			Log(List(Person("hoge")), List(Person("foo")), List(Set(Person("bar1"), Person("bar2")), Set(Person("bar3"), Person("bar4"))))
+		}	
+	}
+	
+	test("The newestNo is the same as input list size") {
+		val log = new Log(List(Person("hoge")), List(Person("foo")), List(Set(Person("bar1"), Person("bar2"))))
+		log.newestNo should be (1)
+	}
 }
