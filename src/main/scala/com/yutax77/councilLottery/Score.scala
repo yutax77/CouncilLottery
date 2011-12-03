@@ -1,11 +1,8 @@
 package com.yutax77.councilLottery
 
-case class Score(person: Person, score: Double) {
-
-}
-
 object Scores {
 	def calcScores(counts: Map[Person, ExeCount], newestNo: Int): Map[Person, Double] = {
+		require(0 < newestNo)
 		val max = counts.values.toList.maxBy(_.count).count
 		def calcScore(count: Int): Double = (1.0 / (1.0 + (count.toDouble / max)))
 		def calcElapsedTimeScore(lastExpNo: Int): Double = (1.0 - (lastExpNo.toDouble / newestNo))
