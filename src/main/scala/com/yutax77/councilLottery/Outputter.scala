@@ -24,24 +24,21 @@ object Outputter {
 		println("---------------------------------------------------");
 		
 		val sorted = results.sortBy(_.score).reverse
-		
-		var count = 1
-		var rank = 1
-		var score = Double.MaxValue
-		breakable{
-			sorted.foreach{comb =>
-				if(comb.score < score){
-					rank += (count - rank)
-				}
-				
-				if(maxRank < rank){
-					break
-				}
-				
-				count += 1
-				score = comb.score
-				print(comb, rank)
-			}			
+		val sortedRank = calcRank(sorted, List[(Int, Combinations)](), Double.MaxValue, 1, 1)
+		sortedRank.filter(_._1 < maxRank).foreach(pair => print(pair._2, pair._1))
+	}
+	
+	def calcRank(l: List[Combinations], result: List[(Int, Combinations)], score: Double, rank: Int, count: Int): List[(Int, Combinations)] = {
+		if(l.isEmpty){
+			result			
+		}
+		else{
+			if(l.head.score < score){
+				calcRank(l.tail, result ::: List((count, l.head)), l.head.score, count, count + 1)
+			}
+			else{
+				calcRank(l.tail, result ::: List((rank, l.head)), l.head.score, rank, count + 1)
+			}
 		}
 	}
 }
