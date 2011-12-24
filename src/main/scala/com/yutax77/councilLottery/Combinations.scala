@@ -2,6 +2,15 @@ package com.yutax77.councilLottery
 
 case class Combinations(chairman: (Person, Double), secretary: (Person, Double), snacks: (Set[Person], Double)) {
 	val score = chairman._2 + secretary._2 + snacks._2
+	def toVector(rank: Int): java.util.Vector[String] = {
+		val result = new java.util.Vector[String]()
+		result.add(rank.toString)
+		result.add("%.2f".format(score))
+		result.add(chairman._1.name)
+		result.add(secretary._1.name)
+		result.add(snacks._1.map(_.name).mkString(", "))
+		result
+	}
 }
 
 object Combinations {

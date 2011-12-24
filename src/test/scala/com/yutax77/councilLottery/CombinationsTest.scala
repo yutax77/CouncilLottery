@@ -39,4 +39,16 @@ class CombinationsTest extends FunSuite with ShouldMatchers {
 		val result = Combinations.makeList(List.empty[(Person, Double)], snacks, pf)
 		result should be (List((Person("bar4"), 1.2), (Person("bar3"), 2.0)))
 	}
+	
+	test("toVector"){
+		val combination = Combinations((Person("bar1"), 2.002), (Person("bar2"), 2.001), (Set(Person("bar3"), Person("bar4")), 3.204))
+		val expected = new java.util.Vector[String]()
+		expected.add("1")
+		expected.add("7.21")
+		expected.add("bar1")
+		expected.add("bar2")
+		expected.add("bar3, bar4")
+		
+		combination.toVector(1) should be (expected)
+	}
 }
