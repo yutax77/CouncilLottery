@@ -4,6 +4,7 @@ import scala.swing._
 import scala.swing.event._
 import java.io.File
 import javax.swing.border.TitledBorder
+import java.awt.Color
 
 class FilePanel(labelName: String) extends BoxPanel(Orientation.Horizontal) {
 	val button = new Button {
@@ -12,6 +13,7 @@ class FilePanel(labelName: String) extends BoxPanel(Orientation.Horizontal) {
 		
 	val fileName = new Label {
 		maximumSize = new Dimension(350, 20)
+		border = Swing.LineBorder(Color.BLACK)
 	}
 	
 	val label = new Label {

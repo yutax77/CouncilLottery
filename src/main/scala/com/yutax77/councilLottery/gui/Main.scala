@@ -20,6 +20,9 @@ import scala.swing.Swing
 
 object Main extends SimpleSwingApplication {
 	def top = new MainFrame {
+		title = "CouncilLottery"
+		size = new Dimension(256, 100)
+		
 		val fileSelector = new BoxPanel(Orientation.Vertical) {
 			val worker = new FilePanel("Worker")
 			val log = new FilePanel("Log")
@@ -44,7 +47,6 @@ object Main extends SimpleSwingApplication {
 		}
 		
 		val panel = new ScrollPane(table)
-		size = new Dimension(256, 212)
 		
 		contents = new BoxPanel(Orientation.Vertical) {
 			contents += fileSelector
